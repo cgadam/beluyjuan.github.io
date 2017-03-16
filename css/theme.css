@@ -670,6 +670,9 @@ footer.bg-dark li,
   -moz-transition: all 0.3s ease;
   opacity: 0;
 }
+.repeat-background {
+  background-size: inherit !important;
+}
 .background-image-holder img {
   display: none;
 }
