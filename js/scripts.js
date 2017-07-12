@@ -569,7 +569,7 @@ $(document).ready(function() {
                 var days = parseInt(event.strftime('%D'));
                 var hour = parseInt(event.strftime('%H')) + parseInt(hourArr[0]);
                 if(hour >= 24){
-                    day++;
+                    days++;
                     hour = hour - 24;
                 }
                 var minute = parseInt(event.strftime('%M')) + parseInt(hourArr[1]);
