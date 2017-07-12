@@ -7,8 +7,42 @@ var mr_firstSectionHeight,
     mr_floatingProjectSections,
     mr_scrollTop = 0;
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var WEDDING_CARD_TYPE = {
+    DESPUES_DE_12: 0,
+    COMPLETO: 1
+}
+
 $(document).ready(function() { 
     "use strict";
+
+    var weddingCardType = getParameterByName("type") === "d12" ? WEDDING_CARD_TYPE.DESPUES_DE_12 : WEDDING_CARD_TYPE.COMPLETO;
+
+    if(weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12){
+        $('#countdown').attr('data-date', '2017/09/10');
+        $('#countdown').attr('date-hour', '00:00:00');
+        $('#iglesiaSection').remove();
+        $('#fiestaSection').removeClass('col-sm-6');
+        $('#teEspero').text('Te esperamos después de 12 ');
+    }
+
+    $('#confirmarAsistencia').on('click', function (event) {
+        event.preventDefault();
+        var email = 'juanybelu9917@gmail.com';
+        var subject = 'Confirmación de Asistencia';
+        var emailBody = 'Hola! Soy [  pone tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] al casamiento' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' después de 12' : '') + '!.';
+        var mailto = encodeURI('mailto:' + email + '?subject=' + subject + '&body=' + emailBody);
+        window.location = mailto;
+    });
 
     // Smooth scroll to inner links
     
@@ -532,11 +566,24 @@ $(document).ready(function() {
             var date = $(this).attr('data-date');
             var hourArr = $(this).attr('date-hour').split(':');
             $(this).countdown(date, function(event) {
+                var days = parseInt(event.strftime('%D'));
                 var hour = parseInt(event.strftime('%H')) + parseInt(hourArr[0]);
+                if(hour >= 24){
+                    day++;
+                    hour = hour - 24;
+                }
                 var minute = parseInt(event.strftime('%M')) + parseInt(hourArr[1]);
+                if(minute >= 60){
+                    hour++;
+                    minute = minute - 60;
+                }
                 var second = parseInt(event.strftime('%S')) + parseInt(hourArr[2]);
-                $(this).text(
-                    event.strftime('Faltan %D días ' + hour + ':' + minute + ':' + second)
+                function toDisplayableTime(number){
+                    var strFormat = '' + number;
+                    strFormat = strFormat.length === 1 ? '0' + strFormat : strFormat;
+                    return strFormat;
+                }
+                $(this).text('Faltan ' +  days + ' días ' + toDisplayableTime(hour) + ':' + toDisplayableTime(minute) + ':' + toDisplayableTime(second)
                 );
             });
         });
