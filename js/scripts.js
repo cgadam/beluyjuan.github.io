@@ -30,16 +30,14 @@ $(document).ready(function() {
     if(weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12){
         $('#countdown').attr('data-date', '2017/09/10');
         $('#countdown').attr('date-hour', '00:00:00');
-        $('#iglesiaSection').remove();
-        $('#fiestaSection').removeClass('col-sm-6');
-        $('#teEspero').text('Te esperamos después de 12 ');
+        $('#teEspero').text('Te esperamos después de las 00:00 ');
     }
 
     $('#confirmarAsistencia').on('click', function (event) {
         event.preventDefault();
         var email = 'juanybelu9917@gmail.com';
         var subject = 'Confirmación de Asistencia';
-        var emailBody = 'Hola! Soy [  pone tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] al casamiento' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' después de 12' : '') + '!.';
+        var emailBody = 'Hola! Soy [  poné tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] al casamiento' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' después de 12' : '') + '!';
         var mailto = encodeURI('mailto:' + email + '?subject=' + subject + '&body=' + emailBody);
         window.location = mailto;
     });
