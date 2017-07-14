@@ -37,7 +37,7 @@ $(document).ready(function() {
         event.preventDefault();
         var email = 'juanybelu9917@gmail.com';
         var subject = 'Confirmación de Asistencia';
-        var emailBody = 'Hola! Soy [  poné tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] al casamiento' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' después de 12' : '') + '!';
+        var emailBody = 'Hola! Soy [  poné tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] ' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' a la fiesta después de 00:00' : ' a la ceremonia religiosa y cena/fiesta') + '!';
         var mailto = encodeURI('mailto:' + email + '?subject=' + subject + '&body=' + emailBody);
         window.location = mailto;
     });
