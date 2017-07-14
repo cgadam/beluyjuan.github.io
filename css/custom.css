@@ -1,4 +1,5 @@
 /****** PLACE YOUR CUSTOM STYLES HERE ******/
-.bold {
-    font-weight: bolder
+.bold-white {
+    font-weight: bolder;
+    color: white
 }
