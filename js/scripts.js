@@ -26,20 +26,18 @@ $(document).ready(function() {
     "use strict";
 
     var weddingCardType = getParameterByName("type") === "d12" ? WEDDING_CARD_TYPE.DESPUES_DE_12 : WEDDING_CARD_TYPE.COMPLETO;
+    var confirmLink = 'https://docs.google.com/forms/d/e/1FAIpQLSfooWs2ZN2bohHQJrxRufQeMBJFiBTTaIVO_T3oiPtg5UTjMA/viewform';
 
     if(weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12){
         $('#countdown').attr('data-date', '2017/09/10');
         $('#countdown').attr('date-hour', '00:00:00');
         $('#teEspero').text('Te esperamos después de las 00:00 ');
+        confirmLink = 'https://docs.google.com/forms/d/e/1FAIpQLScEQPxfInRCacralZM4qsICy0uaZu8mwHL0fVR0kpeMDijv0Q/viewform';
     }
 
     $('#confirmarAsistencia').on('click', function (event) {
         event.preventDefault();
-        var email = 'juanybelu9917@gmail.com';
-        var subject = 'Confirmación de Asistencia';
-        var emailBody = 'Hola! Soy [  poné tu nombre acá ] y les confirmo que voy a ir [ sol@ | acompañad@ ] ' + (weddingCardType === WEDDING_CARD_TYPE.DESPUES_DE_12 ? ' a la fiesta después de 00:00' : ' a la ceremonia religiosa y cena/fiesta') + '!';
-        var mailto = encodeURI('mailto:' + email + '?subject=' + subject + '&body=' + emailBody);
-        window.location = mailto;
+        window.location = confirmLink;
     });
 
     // Smooth scroll to inner links
